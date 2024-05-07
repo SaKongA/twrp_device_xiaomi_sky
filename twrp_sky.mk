@@ -15,8 +15,6 @@
 #
 
 DEVICE_PATH := device/xiaomi/sky
-PRODUCT_PLATFORM := taro
-
 # Custom vendor used in build tree (automatically taken from this file's prefix)
 CUSTOM_VENDOR := $(lastword $(subst /, ,$(firstword $(subst _, ,$(firstword $(MAKEFILE_LIST))))))
 
