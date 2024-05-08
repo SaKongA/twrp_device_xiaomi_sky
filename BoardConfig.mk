@@ -53,9 +53,7 @@ BOARD_KERNEL_IMAGE_NAME := kernel
 BOARD_RAMDISK_USE_LZ4 := true
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/sky/$(BOARD_KERNEL_IMAGE_NAME)
 
-#A/B
-BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+# A/B
 AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
@@ -63,12 +61,14 @@ AB_OTA_PARTITIONS += \
     dtbo \
     odm \
     product \
+    recovery \
     system \
     system_ext \
     vbmeta \
     vbmeta_system \
     vendor \
-    vendor_boot
+    vendor_boot \
+    vendor_dlkm
 
 # QCOM
 #TARGET_USE_SDCLANG := true
