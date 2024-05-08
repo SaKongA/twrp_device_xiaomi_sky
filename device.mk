@@ -20,18 +20,40 @@
 # product configuration (apps).
 #
 
-# Inherit from common AOSP config
+# Configure base.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Configure core_64_bit_only.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
-# Enable project quotas and casefolding for emulated storage without sdcardfs
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
-
-# Installs gsi keys into ramdisk, to boot a GSI with verified boot.
+# Configure gsi_keys.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+
+# Configure Virtual A/B
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Configure twrp
 $(call inherit-product, vendor/twrp/config/common.mk)
+
+# A/B related packages
+PRODUCT_PACKAGES += update_engine \
+    update_engine_client \
+    update_verifier \
+    android.hardware.boot@1.2-impl-qti \
+    android.hardware.boot@1.2-impl-qti.recovery \
+    android.hardware.boot@1.2-service
+
+PRODUCT_PACKAGES += \
+  update_engine_sideload
+
+# SHIPPING API
+PRODUCT_SHIPPING_API_LEVEL := 31
+# VNDK API
+PRODUCT_TARGET_VNDK_VERSION := 31
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(DEVICE_PATH)
 
 # Platform
 QCOM_BOARD_PLATFORMS += $(PRODUCT_PLATFORM)
@@ -48,24 +70,11 @@ AB_OTA_UPDATER := true
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 31
 
-# Virtual A/B
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-
 # A/B updater updatable partitions list. Keep in sync with the partition list
 # with "_a" and "_b" variants in the device. Note that the vendor can add more
 # more partitions to this list for the bootloader and radio.
 AB_OTA_PARTITIONS ?= boot vendor_boot recovery vendor vendor_dlkm odm dtbo vbmeta
 
-# A/B related packages
-PRODUCT_PACKAGES += update_engine \
-    update_engine_client \
-    update_verifier \
-    android.hardware.boot@1.2-impl-qti \
-    android.hardware.boot@1.2-impl-qti.recovery \
-    android.hardware.boot@1.2-service
-
-PRODUCT_PACKAGES += \
-  update_engine_sideload
 
 # f2fs utilities
 PRODUCT_PACKAGES += \
@@ -82,12 +91,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
-
-# Set GRF/Vendor freeze properties
-BOARD_SHIPPING_API_LEVEL := 31
-BOARD_API_LEVEL := 31
-SHIPPING_API_LEVEL := 31
-PRODUCT_SHIPPING_API_LEVEL := 31
 
 #Support to compile recovery without msm headers
 TARGET_HAS_GENERIC_KERNEL_HEADERS := true
@@ -111,9 +114,6 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    $(DEVICE_PATH)
 
 #namespace definition for librecovery_updater
 #differentiate legacy 'sg' or 'bsg' framework
