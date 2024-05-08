@@ -14,19 +14,19 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/alioth
+DEVICE_PATH := device/xiaomi/sky
 
 # Inherit from device.mk configuration
 $(call inherit-product, $(DEVICE_PATH)/device.mk)
 
 # Release name
-PRODUCT_RELEASE_NAME := alioth
+PRODUCT_RELEASE_NAME := sky
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := alioth
-PRODUCT_NAME := twrp_alioth
+PRODUCT_DEVICE := sky
+PRODUCT_NAME := twrp_sky
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Redmi K40
+PRODUCT_MODEL := Redmi Note12R
 PRODUCT_MANUFACTURER := Xiaomi
 
 # Theme
