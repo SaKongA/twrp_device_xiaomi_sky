@@ -158,5 +158,4 @@ TW_HAS_EDL_MODE := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS :=true
 TW_LOAD_VENDOR_MODULES := "msm_drm.ko adsp_loader_dlkm.ko qti_battery_charger.ko"
 TW_BACKUP_EXCLUSIONS := /data/fonts
-TW_FRAMERATE := 60
-
+TW_FRAMERATE := 90
