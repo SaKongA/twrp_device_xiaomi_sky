@@ -16,3 +16,8 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_sky.mk
+
+COMMON_LUNCH_CHOICES := \
+    twrp_sky-eng \
+    twrp_sky-userdebug \
+    twrp_sky-user
