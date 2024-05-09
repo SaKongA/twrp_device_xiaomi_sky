@@ -37,16 +37,26 @@ on fs
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
     chown system system /dev/ion
+    # Mount firmware
+    mkdir /firmware
+    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
     install_keyring
 
 on init
-    start vendor.qseecomd
     start boot-hal-1-1
 
 on boot
-    start health-hal-2-1
-    start vendor.qti.vibrator
     setprop sys.usb.config adb
+
+on property:twrp.modules.loaded=true
+    # Load ADSP firmware for PMIC
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+    wait /sys/class/power_supply/battery
+    start vendor.qseecomd
+    start vendor.qti.vibrator
+    start health-hal-2-1
+    umount /firmware
 
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-1
