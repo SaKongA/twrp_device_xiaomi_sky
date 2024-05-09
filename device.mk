@@ -29,6 +29,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 # Configure twrp
 $(call inherit-product, vendor/twrp/config/common.mk)
 
+# Additional binaries & libraries needed for recovery
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libdmabufheap
+
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libdmabufheap.so
+    
 PRODUCT_PACKAGES += \
     bootctrl.xiaomi_sm4450.recovery \
     android.hardware.boot@1.1-impl-qti.recovery
