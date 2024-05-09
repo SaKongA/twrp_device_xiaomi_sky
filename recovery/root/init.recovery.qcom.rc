@@ -74,4 +74,5 @@ service vendor.qti.vibrator /vendor/bin/hw/vendor.qti.hardware.vibrator.service
     class hal
     user system
     group system input
+    disabled
     seclabel u:r:recovery:s0
