@@ -42,7 +42,7 @@ TARGET_USES_UEFI := true
 
 # Platform
 TARGET_BOARD_PLATFORM := xiaomi_sm4450
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno650
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno613
 QCOM_BOARD_PLATFORMS += xiaomi_sm4450
 
 # Kernel
