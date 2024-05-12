@@ -38,7 +38,7 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
     
 PRODUCT_PACKAGES += \
     bootctrl.xiaomi_sm4450.recovery \
-    android.hardware.boot@1.1-impl-qti.recovery
+    android.hardware.boot@1.2-impl-qti.recovery
 
 # SHIPPING API
 PRODUCT_SHIPPING_API_LEVEL := 30
